@@ -29,7 +29,7 @@ const platforms: PlatformsConfig = {
 			else if (portfolioValue > 1000000) fee = 0.6;
 			else if (portfolioValue > 500000) fee = 0.8;
 
-			return fee - fee * sale;
+			return fee * (1 - sale);
 		},
 	},
 	// partners: {
