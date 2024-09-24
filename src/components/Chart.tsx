@@ -23,80 +23,88 @@ export default function Chart({ currency, data }: ChartProps) {
 	}));
 
 	return (
-		<Line
-			data={{
-				labels,
-				datasets: [
-					...datasets,
-					{
-						label: "Invested Amount",
-						data: data[0].investedValues,
-						borderColor: "#d0d0d0",
-						backgroundColor: "#d0d0d070",
-						borderDash: [5, 5],
-					},
-				],
+		<div
+			style={{
+				width: "100%",
+				height: "40rem",
 			}}
-			options={{
-				animation: false,
-				interaction: {
-					intersect: false,
-					mode: "index",
-				},
-				elements: {
-					point: {
-						radius: 0,
+		>
+			<Line
+				data={{
+					labels,
+					datasets: [
+						...datasets,
+						{
+							label: "Invested Amount",
+							data: data[0].investedValues,
+							borderColor: "#d0d0d0",
+							backgroundColor: "#d0d0d070",
+							borderDash: [5, 5],
+						},
+					],
+				}}
+				options={{
+					maintainAspectRatio: false,
+					animation: false,
+					interaction: {
+						intersect: false,
+						mode: "index",
 					},
-				},
-				scales: {
-					x: {
-						ticks: {
-							callback: (_, index: number) => {
-								// Show only the years on the X axis
-								if (index % 12 === 0) {
-									return `Year ${index / 12}`;
-								}
-								return "";
+					elements: {
+						point: {
+							radius: 0,
+						},
+					},
+					scales: {
+						x: {
+							ticks: {
+								callback: (_, index: number) => {
+									// Show only the years on the X axis
+									if (index % 12 === 0) {
+										return `Year ${index / 12}`;
+									}
+									return "";
+								},
+							},
+						},
+						y: {
+							ticks: {
+								callback: (value: number | string) => `${value.toLocaleString()} ${currency}`,
 							},
 						},
 					},
-					y: {
-						ticks: {
-							callback: (value: number | string) => `${value.toLocaleString()} ${currency}`,
+					plugins: {
+						legend: {
+							position: "bottom",
 						},
-					},
-				},
-				plugins: {
-					legend: {
-						position: "bottom",
-					},
-					tooltip: {
-						itemSort: (a, b) => b.parsed.y - a.parsed.y,
-						callbacks: {
-							label: (context) => {
-								const label = context.dataset.label;
-								const value = context.parsed.y as number;
+						tooltip: {
+							itemSort: (a, b) => b.parsed.y - a.parsed.y,
+							callbacks: {
+								label: (context) => {
+									const label = context.dataset.label;
+									const value = context.parsed.y as number;
 
-								return `${label}: ${value.toLocaleString()} ${currency}`;
+									return `${label}: ${value.toLocaleString()} ${currency}`;
+								},
 							},
 						},
-					},
-					zoom: {
 						zoom: {
-							drag: {
-								enabled: true,
+							zoom: {
+								drag: {
+									enabled: true,
+								},
+								wheel: {
+									enabled: true,
+								},
+								pinch: {
+									enabled: true,
+								},
+								mode: "x",
 							},
-							wheel: {
-								enabled: true,
-							},
-							pinch: {
-								enabled: true,
-							},
-							mode: "x",
 						},
 					},
-				},
-			}}
-		/>
+				}}
+			/>
+		</div>
 	);
 }
