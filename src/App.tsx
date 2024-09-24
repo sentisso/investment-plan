@@ -86,7 +86,7 @@ function App() {
 								label={
 									<span>
 										Average Annual Return{" "}
-										<Tooltip title="The expected average annual return rate.">
+										<Tooltip title="Portfolio value is calculated each month based on the annual return.">
 											<QuestionCircleOutlined />
 										</Tooltip>
 									</span>
