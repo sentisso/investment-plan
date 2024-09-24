@@ -43,92 +43,96 @@ function App() {
 
 				<Chart data={calculatedPlatformPlans} currency={currency} />
 
-				<Form layout="vertical">
-					<Form.Item
-						label={
-							<span>
-								Base Investment{" "}
-								<Tooltip title="The one-time investment you plan to make.">
-									<QuestionCircleOutlined />
-								</Tooltip>
-							</span>
-						}
-					>
-						<InputNumber
-							min={0}
-							step={1000}
-							value={plan.baseInvestment}
-							onChange={(value) => value != null && handleInputChange("baseInvestment", value)}
-							addonAfter={currency}
-						/>
-					</Form.Item>
-					<Form.Item
-						label={
-							<span>
-								Monthly Investment{" "}
-								<Tooltip title="The amount of money you plan to invest each month.">
-									<QuestionCircleOutlined />
-								</Tooltip>
-							</span>
-						}
-					>
-						<InputNumber
-							min={0}
-							step={100}
-							value={plan.monthlyInvestment}
-							onChange={(value) => value != null && handleInputChange("monthlyInvestment", value)}
-							addonAfter={currency}
-						/>
-					</Form.Item>
-					<Form.Item
-						label={
-							<span>
-								Average Annual Return{" "}
-								<Tooltip title="The expected average annual return rate.">
-									<QuestionCircleOutlined />
-								</Tooltip>
-							</span>
-						}
-					>
-						<InputNumber
-							min={0}
-							max={100}
-							step={0.1}
-							value={plan.averageAnnualReturn}
-							onChange={(value) => value != null && handleInputChange("averageAnnualReturn", value)}
-							addonAfter="%"
-						/>
-					</Form.Item>
-					<Form.Item
-						label={
-							<span>
-								Years investing{" "}
-								<Tooltip title="The number of years you plan to invest. This also affects Portu fees.">
-									<QuestionCircleOutlined />
-								</Tooltip>
-							</span>
-						}
-					>
-						<Row>
-							<Col span={8}>
-								<Slider
-									min={1}
-									max={50}
-									onChange={(value) => value != null && handleInputChange("years", value)}
-									value={plan.years}
-								/>
-							</Col>
-							<Col span={4}>
+				<Form layout="vertical" className="mt-8">
+					<Row>
+						<Col xs={24} md={12}>
+							<Form.Item
+								label={
+									<span>
+										Base Investment{" "}
+										<Tooltip title="The one-time investment you plan to make.">
+											<QuestionCircleOutlined />
+										</Tooltip>
+									</span>
+								}
+							>
 								<InputNumber
-									min={1}
-									max={50}
-									value={plan.years}
-									onChange={(value) => value != null && handleInputChange("years", value)}
+									min={0}
+									step={1000}
+									value={plan.baseInvestment}
+									onChange={(value) => value != null && handleInputChange("baseInvestment", value)}
+									addonAfter={currency}
 								/>
-							</Col>
-						</Row>
-					</Form.Item>
-					{/* <Form.Item label={<span>Currency <Tooltip title="Currency used for the visualization (does not affect calculations)."><QuestionCircleOutlined /></Tooltip></span>}>
+							</Form.Item>
+							<Form.Item
+								label={
+									<span>
+										Monthly Investment{" "}
+										<Tooltip title="The amount of money you plan to invest each month.">
+											<QuestionCircleOutlined />
+										</Tooltip>
+									</span>
+								}
+							>
+								<InputNumber
+									min={0}
+									step={100}
+									value={plan.monthlyInvestment}
+									onChange={(value) => value != null && handleInputChange("monthlyInvestment", value)}
+									addonAfter={currency}
+								/>
+							</Form.Item>
+							<Form.Item
+								label={
+									<span>
+										Average Annual Return{" "}
+										<Tooltip title="The expected average annual return rate.">
+											<QuestionCircleOutlined />
+										</Tooltip>
+									</span>
+								}
+							>
+								<InputNumber
+									min={0}
+									max={100}
+									step={0.1}
+									value={plan.averageAnnualReturn}
+									onChange={(value) => value != null && handleInputChange("averageAnnualReturn", value)}
+									addonAfter="%"
+								/>
+							</Form.Item>
+						</Col>
+						<Col xs={24} lg={12}>
+							<Form.Item
+								label={
+									<span>
+										Years investing{" "}
+										<Tooltip title="The number of years you plan to invest. This also affects Portu fees.">
+											<QuestionCircleOutlined />
+										</Tooltip>
+									</span>
+								}
+							>
+								<Row>
+									<Col span={12}>
+										<Slider
+											min={1}
+											max={50}
+											onChange={(value) => value != null && handleInputChange("years", value)}
+											value={plan.years}
+										/>
+									</Col>
+									<Col span={4}>
+										<InputNumber
+											min={1}
+											max={50}
+											value={plan.years}
+											onChange={(value) => value != null && handleInputChange("years", value)}
+										/>
+									</Col>
+								</Row>
+							</Form.Item>
+							{/* <Form.Item label={<span>Currency <Tooltip title="Currency used for the visualization (does not affect calculations)."><QuestionCircleOutlined /></Tooltip></span>}>
 					<Col span={2}>
 					<Input
 						value={currency}
@@ -136,23 +140,25 @@ function App() {
 					/>
 					</Col>
 				</Form.Item> */}
-					<Form.Item
-						label={
-							<span>
-								Number of investment products{" "}
-								<Tooltip title="The number of investment products you plan to have in your portfolio (e.g. number of ETFs). This affects the IBKR fee.">
-									<QuestionCircleOutlined />
-								</Tooltip>
-							</span>
-						}
-					>
-						<InputNumber
-							min={1}
-							step={1}
-							value={plan.numberOfProducts}
-							onChange={(value) => value != null && handleInputChange("numberOfProducts", value)}
-						/>
-					</Form.Item>
+							<Form.Item
+								label={
+									<span>
+										Number of investment products{" "}
+										<Tooltip title="The number of investment products you plan to have in your portfolio (e.g. number of ETFs). This affects the IBKR fee.">
+											<QuestionCircleOutlined />
+										</Tooltip>
+									</span>
+								}
+							>
+								<InputNumber
+									min={1}
+									step={1}
+									value={plan.numberOfProducts}
+									onChange={(value) => value != null && handleInputChange("numberOfProducts", value)}
+								/>
+							</Form.Item>
+						</Col>
+					</Row>
 				</Form>
 
 				<PlatformFees currency={currency} />

@@ -14,14 +14,14 @@ const getInvestmentAfterFees = (
 	plan: PlanConfig,
 	platform: PlatformConfig,
 ) => {
-	const fixedFee = getFee(plan, portfolioValue, platform.fixedFee);
-	const percentageFee = getFee(plan, portfolioValue, platform.percentageFee) / 100;
+	const fixedFee = getFee(plan, portfolioValue, platform.fees.fixedFee);
+	const percentageFee = getFee(plan, portfolioValue, platform.fees.percentageFee) / 100;
 
 	return investment * (1 - percentageFee) - fixedFee;
 };
 
 const getPortfolioValueAfterFees = (portfolioValue: number, plan: PlanConfig, platform: PlatformConfig) => {
-	const annualPercentageFee = getFee(plan, portfolioValue, platform.annualPercentageFee) / 100;
+	const annualPercentageFee = getFee(plan, portfolioValue, platform.fees.annualPercentageFee) / 100;
 	const monthlyPercentageFee = annualPercentageFee / 12;
 
 	return portfolioValue * (1 - monthlyPercentageFee);

@@ -11,10 +11,13 @@ export interface PlanConfig {
 export interface PlatformConfig {
 	name: string;
 	color: string;
-	fixedFee: number | DynamicFee;
-	// usually currency conversion fees
-	percentageFee: number | DynamicFee;
-	annualPercentageFee: number | DynamicFee;
+	logo?: string;
+	fees: {
+		fixedFee: number | DynamicFee;
+		// usually currency conversion fees
+		percentageFee: number | DynamicFee;
+		annualPercentageFee: number | DynamicFee;
+	};
 }
 
 export interface CalculatedPlatformPlan {

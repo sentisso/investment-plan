@@ -17,19 +17,27 @@ export default function PlatformFees({ currency }: PlatformFeesProps) {
 		<div className="mt-14">
 			<h2 className="text-2xl font-bold mb-4">Platform Fees</h2>
 
-			<Row gutter={16}>
-				{Object.keys(platforms).map((platform) => (
-					<Col span={6}>
+			<Row gutter={16} className="mb-2">
+				{Object.values(platforms).map((platform) => (
+					<Col xs={24} sm={12} lg={8} xl={6}>
 						<Card className="mb-4">
-							<h3 className="text-lg font-bold">{platforms[platform].name}</h3>
+							{platform.logo ? (
+								<img
+									src={`${import.meta.env.BASE_URL}${platform.logo}`}
+									draggable="false"
+									className="max-w-40 max-h-8 mb-4"
+								/>
+							) : (
+								<h3 className="text-lg font-bold mb-4">{platform.name}</h3>
+							)}
 							<p>
-								<strong>Fixed fee:</strong> {getFeeValue(platforms[platform].fixedFee, currency)}
+								<strong>Fixed fee:</strong> {getFeeValue(platform.fees.fixedFee, currency)}
 							</p>
 							<p>
-								<strong>Percentage fee:</strong> {getFeeValue(platforms[platform].percentageFee, "%")}
+								<strong>Percentage fee:</strong> {getFeeValue(platform.fees.percentageFee, "%")}
 							</p>
 							<p>
-								<strong>Annual percentage fee:</strong> {getFeeValue(platforms[platform].annualPercentageFee, "% p.a.")}
+								<strong>Annual percentage fee:</strong> {getFeeValue(platform.fees.annualPercentageFee, "% p.a.")}
 							</p>
 						</Card>
 					</Col>
