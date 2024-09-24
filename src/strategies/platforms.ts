@@ -55,6 +55,13 @@ const platforms: PlatformsConfig = {
 		percentageFee: 0.8,
 		annualPercentageFee: 0,
 	},
+	xtb: {
+		name: "xtb",
+		color: "#f73e4a",
+		fixedFee: 0,
+		percentageFee: 0.5,
+		annualPercentageFee: 0,
+	},
 	t212: {
 		name: "T212",
 		color: "#00a7e1",
@@ -69,6 +76,13 @@ const platforms: PlatformsConfig = {
 			return plan.numberOfProducts * USD_TO_CZK;
 		},
 		percentageFee: 0.03, // non-manual currency conversion
+		annualPercentageFee: 0,
+	},
+	etoro: {
+		name: "eToro",
+		color: "#13c636",
+		fixedFee: 0,
+		percentageFee: 0.75,
 		annualPercentageFee: 0,
 	},
 	nofees: {

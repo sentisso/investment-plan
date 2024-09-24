@@ -71,6 +71,7 @@ export default function Chart({ currency, data }: ChartProps) {
 						position: "bottom",
 					},
 					tooltip: {
+						itemSort: (a, b) => b.parsed.y - a.parsed.y,
 						callbacks: {
 							label: (context) => {
 								const label = context.dataset.label;
