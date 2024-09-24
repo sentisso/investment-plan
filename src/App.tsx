@@ -7,6 +7,7 @@ import { calculatePlatformPlan } from "./strategies/index.ts";
 import platforms from "./strategies/platforms.ts";
 import Footer from "./components/Footer.tsx";
 import Header from "./components/Header.tsx";
+import PlatformFees from "./components/PlatformFees.tsx";
 
 function App() {
 	const [plan, setPlan] = useState<PlanConfig>({
@@ -34,7 +35,7 @@ function App() {
 	};
 
 	return (
-		<Layout className="max-w-screen-xl mx-auto bg-white">
+		<Layout className="max-w-screen-xl mx-auto bg-white px-3">
 			<Header />
 
 			<Layout.Content>
@@ -153,8 +154,9 @@ function App() {
 						/>
 					</Form.Item>
 				</Form>
-			</Layout.Content>
 
+				<PlatformFees currency={currency} />
+			</Layout.Content>
 			<Footer />
 		</Layout>
 	);
