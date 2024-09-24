@@ -1,4 +1,4 @@
-export type DynamicFee = (plan: PlanConfig, portfolioValue: number) => number;
+export type DynamicFee = (plan: PlanConfig, portfolioValue: number, totalInvested: number) => number;
 
 export interface PlanConfig {
 	years: number;

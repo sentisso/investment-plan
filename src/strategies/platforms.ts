@@ -37,24 +37,31 @@ const platforms: PlatformsConfig = {
 			},
 		},
 	},
-	// partners: {
-	// 	name: "Partners",
-	// 	color: "#5fc3d1",
-	// 	fees: {
-	// 		fixedFee: (plan: PlanConfig, portfolioValue: number) => {
-	// 			// this total fixed fee is being gradually paid-off by the monthly investments
-	// 			// where 40% of the investment is used to pay off the "debt" and the remaining 60% is invested
-	// 			// after the debt is paid off, the 100% of the investment is invested with 0% fees
-	// 			const totalInvestedAmount = plan.baseInvestment + plan.monthlyInvestment * plan.years * 12;
-	// 			const totalFixedFee = totalInvestedAmount * 0.045;
-	//
-	// 			// TODO: monthly investment needs to be dynamically calculated too
-	// 			return 0;
-	// 		},
-	// 		percentageFee: 0,
-	// 		annualPercentageFee: 1.99,
-	// 	},
-	// },
+	partners: {
+		name: "Partners",
+		color: "#5fc3d1",
+		logo: "/platforms/partners.png",
+		fees: {
+			fixedFee: (plan: PlanConfig, _: number, totalInvested: number) => {
+				// the "total fixed fee" is being gradually paid-off by monthly investments
+				// where 40% of the investment is used to pay off the "debt" and the remaining 60% is actually invested
+				// after the debt is paid off, all the remaining investments are invested with 0% fees
+
+				const plannedInvestments = plan.baseInvestment + plan.monthlyInvestment * plan.years * 12;
+				const totalFixedFee = plannedInvestments * 0.045;
+				const paidOff = totalInvested * 0.4;
+				const remaining = totalFixedFee - paidOff;
+
+				if (remaining <= 0) return 0;
+
+				if (totalInvested > 0) return Math.min(remaining, plan.monthlyInvestment * 0.4);
+
+				return Math.min(remaining, plan.baseInvestment * 0.4);
+			},
+			percentageFee: 0,
+			annualPercentageFee: 0,
+		},
+	},
 	patria: {
 		name: "Patria",
 		color: "#f59100",
