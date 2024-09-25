@@ -144,7 +144,7 @@ function App() {
 								label={
 									<span>
 										Number of investment products{" "}
-										<Tooltip title="The number of investment products you plan to have in your portfolio (e.g. number of ETFs). This affects the IBKR fee.">
+										<Tooltip title="The number of investment products you plan to have in your portfolio (e.g. number of ETFs). This affects the IBKR and Degiro fees.">
 											<QuestionCircleOutlined />
 										</Tooltip>
 									</span>
