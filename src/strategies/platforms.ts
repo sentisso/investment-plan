@@ -1,6 +1,7 @@
 import type { PlanConfig, PlatformsConfig } from "./types";
 
 const USD_TO_CZK = 22.52;
+const EUR_TO_CZK = 25.16;
 
 const platforms: PlatformsConfig = {
 	edward: {
@@ -111,6 +112,18 @@ const platforms: PlatformsConfig = {
 		fees: {
 			fixedFee: 0,
 			percentageFee: 0.75,
+			annualPercentageFee: 0,
+		},
+	},
+	degiro: {
+		name: "Degiro",
+		color: "#009fdf",
+		logo: "/platforms/degiro.svg",
+		fees: {
+			fixedFee: (plan: PlanConfig) => {
+				return plan.numberOfProducts * EUR_TO_CZK;
+			},
+			percentageFee: 0.25,
 			annualPercentageFee: 0,
 		},
 	},

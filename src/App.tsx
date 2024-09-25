@@ -50,7 +50,7 @@ function App() {
 								label={
 									<span>
 										Base Investment{" "}
-										<Tooltip title="The one-time investment you plan to make.">
+										<Tooltip title="The one-time investment of your already saved money.">
 											<QuestionCircleOutlined />
 										</Tooltip>
 									</span>
@@ -98,7 +98,7 @@ function App() {
 									step={0.1}
 									value={plan.averageAnnualReturn}
 									onChange={(value) => value != null && handleInputChange("averageAnnualReturn", value)}
-									addonAfter="%"
+									addonAfter="% p.a."
 								/>
 							</Form.Item>
 						</Col>
