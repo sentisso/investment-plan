@@ -5,6 +5,7 @@ const platforms: PlatformsConfig = {
 	edward: {
 		name: "edward",
 		color: "#ffcb13",
+		logo: "/platforms/edwardinvest.png",
 		url: "https://edwardinvest.cz/docs/jake-poplatky-klient-plati/",
 		fees: {
 			fixedFee: 0,
@@ -97,7 +98,7 @@ const platforms: PlatformsConfig = {
 		},
 	},
 	ibkr: {
-		name: "IBKR",
+		name: "IBKR API",
 		color: "#d91222",
 		logo: "/platforms/ibkr.svg",
 		url: "https://www.interactivebrokers.com/en/pricing/commissions-stocks.php",

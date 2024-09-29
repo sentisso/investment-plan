@@ -3,7 +3,7 @@ import { QuestionCircleOutlined } from "@ant-design/icons";
 import Chart from "./components/Chart.tsx";
 import { useMemo, useRef, useState } from "react";
 import type { PlanConfig, CalculatedPlatformPlan } from "./strategies/types.ts";
-import { calculatePlatformPlan } from "./strategies/index.ts";
+import { calculatePlatformPlan } from "./strategies";
 import platforms from "./strategies/platforms.ts";
 import Footer from "./components/Footer.tsx";
 import Header from "./components/Header.tsx";
