@@ -1,12 +1,11 @@
 import type { PlanConfig, PlatformsConfig } from "./types";
-
-const USD_TO_CZK = 22.52;
-const EUR_TO_CZK = 25.16;
+import { EUR_TO_CZK, USD_TO_CZK } from "./index.ts";
 
 const platforms: PlatformsConfig = {
 	edward: {
-		name: "Edward (Kos)",
+		name: "edward",
 		color: "#ffcb13",
+		url: "https://edwardinvest.cz/docs/jake-poplatky-klient-plati/",
 		fees: {
 			fixedFee: 0,
 			percentageFee: 0,
@@ -17,6 +16,7 @@ const platforms: PlatformsConfig = {
 		name: "Portu",
 		color: "#00a03c",
 		logo: "/platforms/portu.svg",
+		url: "https://www.portu.cz/kolik-to-stoji/",
 		fees: {
 			fixedFee: 0,
 			percentageFee: 0,
@@ -67,6 +67,7 @@ const platforms: PlatformsConfig = {
 		name: "Patria",
 		color: "#f59100",
 		logo: "/platforms/patria.png",
+		url: "https://cdn.patria.cz/Sazebnik-PD.en.pdf",
 		fees: {
 			fixedFee: 0,
 			percentageFee: 0.8,
@@ -77,6 +78,7 @@ const platforms: PlatformsConfig = {
 		name: "xtb",
 		color: "#f73e4a",
 		logo: "/platforms/xtb.svg",
+		url: "https://www.xtb.com/cz/ucet-a-poplatky",
 		fees: {
 			fixedFee: 0,
 			percentageFee: 0.5,
@@ -87,6 +89,7 @@ const platforms: PlatformsConfig = {
 		name: "T212",
 		color: "#00a7e1",
 		logo: "/platforms/t212.png",
+		url: "https://www.trading212.com/terms/invest",
 		fees: {
 			fixedFee: 0,
 			percentageFee: 0.15, // currency conversion
@@ -97,11 +100,35 @@ const platforms: PlatformsConfig = {
 		name: "IBKR",
 		color: "#d91222",
 		logo: "/platforms/ibkr.svg",
+		url: "https://www.interactivebrokers.com/en/pricing/commissions-stocks.php",
 		fees: {
 			fixedFee: (plan: PlanConfig) => {
-				return plan.numberOfProducts * USD_TO_CZK;
+				return plan.numberOfInstruments * USD_TO_CZK;
+
+				// // plan percentage fee is subtracted first, we need to simulate it here
+				// const investment = getInvestmentAfterFees(plan.monthlyInvestment, 0.03, 0); // currency conversion
+				//
+				// return calculatePercentageFeeWithFixedMinimum(plan, 0.02, USD_TO_CZK, investment);
 			},
 			percentageFee: 0.03, // non-manual currency conversion
+			annualPercentageFee: 0,
+		},
+	},
+	saxo: {
+		name: "SAXO",
+		color: "#003cd2",
+		logo: "/platforms/saxo.svg",
+		url: "https://www.home.saxo/cs-cz/rates-and-conditions/etf/commissions",
+		fees: {
+			fixedFee: (plan: PlanConfig) => {
+				return plan.numberOfInstruments * USD_TO_CZK;
+
+				// // plan percentage fee is subtracted first, we need to simulate it here
+				// const investment = getInvestmentAfterFees(plan.monthlyInvestment, 0.25, 0); // currency conversion
+				//
+				// return calculatePercentageFeeWithFixedMinimum(plan, 0.08, USD_TO_CZK, investment);
+			},
+			percentageFee: 0.25, // currency conversion
 			annualPercentageFee: 0,
 		},
 	},
@@ -109,6 +136,7 @@ const platforms: PlatformsConfig = {
 		name: "eToro",
 		color: "#13c636",
 		logo: "/platforms/etoro.svg",
+		url: "https://www.etoro.com/trading/fees/",
 		fees: {
 			fixedFee: 0,
 			percentageFee: 0.75,
@@ -119,9 +147,15 @@ const platforms: PlatformsConfig = {
 		name: "Degiro",
 		color: "#009fdf",
 		logo: "/platforms/degiro.svg",
+		url: "https://www.degiro.com/uk/data/pdf/uk/UK_Feeschedule.pdf",
 		fees: {
 			fixedFee: (plan: PlanConfig) => {
-				return plan.numberOfProducts * EUR_TO_CZK;
+				return plan.numberOfInstruments * EUR_TO_CZK;
+
+				// // plan percentage fee is subtracted first, we need to simulate it here
+				// const investment = getInvestmentAfterFees(plan.monthlyInvestment, 0.25, 0); // currency conversion
+				//
+				// return calculatePercentageFeeWithFixedMinimum(plan, 0, EUR_TO_CZK, investment);
 			},
 			percentageFee: 0.25,
 			annualPercentageFee: 0,

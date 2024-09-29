@@ -19,17 +19,28 @@ export default function PlatformFees({ currency }: PlatformFeesProps) {
 
 			<Row gutter={16} className="mb-2">
 				{Object.values(platforms).map((platform) => (
-					<Col xs={24} sm={12} lg={8} xl={6}>
-						<Card className="mb-4">
-							{platform.logo ? (
-								<img
-									src={`${import.meta.env.BASE_URL}${platform.logo}`}
-									draggable="false"
-									className="max-w-40 max-h-8 mb-4"
-								/>
-							) : (
-								<h3 className="text-lg font-bold mb-4">{platform.name}</h3>
-							)}
+					<Col xs={24} sm={12} lg={8} xl={6} key={platform.name}>
+						<Card
+							className="mb-4"
+							title={
+								platform.logo ? (
+									<img
+										src={`${import.meta.env.BASE_URL}${platform.logo}`}
+										draggable="false"
+										className="max-w-40 max-h-8"
+									/>
+								) : (
+									<h3 className="text-lg font-bold">{platform.name}</h3>
+								)
+							}
+							extra={
+								platform.url && (
+									<a href={platform.url} target="_blank" className="text-blue-500">
+										source
+									</a>
+								)
+							}
+						>
 							<p>
 								<strong>Fixed fee:</strong> {getFeeValue(platform.fees.fixedFee, currency)}
 							</p>
