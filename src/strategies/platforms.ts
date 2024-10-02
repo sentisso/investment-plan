@@ -10,7 +10,14 @@ const platforms: PlatformsConfig = {
 		fees: {
 			fixedFee: 0,
 			percentageFee: 0,
-			annualPercentageFee: 1.99,
+			annualPercentageFee: (_plan: PlanConfig, portfolioValue: number) => {
+				let fee = 1.99;
+				if (portfolioValue > 20000000) fee = 0.99;
+				else if (portfolioValue > 10000000) fee = 1.29;
+				else if (portfolioValue > 5000000) fee = 1.79;
+
+				return fee;
+			},
 		},
 	},
 	portu: {
@@ -22,8 +29,7 @@ const platforms: PlatformsConfig = {
 			fixedFee: 0,
 			percentageFee: 0,
 			annualPercentageFee: (plan: PlanConfig, portfolioValue: number) => {
-				// see https://www.portu.cz/kolik-to-stoji
-
+				// Portu has sales for long-term clients
 				let sale = 0;
 				if (plan.years >= 15) sale = 0.4;
 				else if (plan.years >= 10) sale = 0.3;
