@@ -14,7 +14,8 @@ const platforms: PlatformsConfig = {
 				let fee = 1.99;
 				if (portfolioValue > 20000000) fee = 0.99;
 				else if (portfolioValue > 10000000) fee = 1.29;
-				else if (portfolioValue > 5000000) fee = 1.79;
+				else if (portfolioValue > 5000000) fee = 1.59;
+				else if (portfolioValue > 1000000) fee = 1.79;
 
 				return fee;
 			},
